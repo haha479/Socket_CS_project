@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			/*
+			 * 右键事件
+			 * 	- oncontextmenu
+			 */
+			#box1{
+				width: 200px;
+				height: 300px;
+				background: yellow;
+				
+				display: none;
+				
+				position: absolute;
+			}
+		</style>
+		<!--导入计时器js文件-->
+		<script type="text/javascript" src="js/move.js" ></script>
+		<script type="text/javascript">
+			
+			window.onload = function(){
+				
+				//获取box1
+				var box1 = document.getElementById("box1")
+				
+				
+				//设置鼠标单击右键的事件
+				document.oncontextmenu = function(event){
+					
+					event = event || window.event
+					
+					//获取鼠标的坐标
+					var left = event.clientX
+					var top = event.clientY
+					//显示
+					box1.style.display = "block"
+					
+					//设置div随鼠标
+					box1.style.left = left + "px"
+					box1.style.top = top + "px"
+					//设置默认的高度是0
+					box1.style.height = 0
+					//调用计时器函数
+					move(box1 , "height" , 300 , 20)
+				//取消默认行为
+				return false
+				}
+				//单击时收起div
+				document.onclick = function(){
+					//box1.style.display = "none"
+					//调用计时器函数收起div
+					move(box1 , "height" , 0 , 40)
+				}
+				
+			};
+			
+		</script>
+	</head>
+	<body>
+		<div id="box1"></div>
+	</body>
+</html>
